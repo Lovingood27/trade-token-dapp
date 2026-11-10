@@ -1,0 +1,299 @@
+// Version: 4.0.0
+type AccessControlState__201339279 =
+  {
+    var adminAssigned : Bool;
+    userRoles : Map__230067015<Principal, UserRole__91647283>
+  };
+type AttachedDocument__594305756 =
+  {
+    contentType : Text;
+    file : FileRef__632245377;
+    fileName : Text;
+    id : DocumentId__867675905;
+    tokenId : TokenId__1040808229;
+    uploadedAt : Timestamp__941358098
+  };
+type AttachedDocument__740676039 =
+  {
+    contentType : Text;
+    file : Blob;
+    fileName : Text;
+    id : Nat;
+    tokenId : Nat;
+    uploadedAt : Int
+  };
+type AttachedDocument__951595075 =
+  {
+    contentType : Text;
+    file : Blob;
+    fileName : Text;
+    id : Nat;
+    tokenId : Nat;
+    uploadedAt : Int
+  };
+type CommitmentId__1060597516 = Nat;
+type CommitmentId__425385189 = CommitmentId__1060597516;
+type Counters__138551672 =
+  {
+    var nextCommitmentId : Nat;
+    var nextDocumentId : Nat;
+    var nextTokenId : Nat
+  };
+type Counters__577113774 =
+  {
+    var nextCommitmentId : Nat;
+    var nextDocumentId : Nat;
+    var nextTokenId : Nat
+  };
+type Data__44217153<K, V> = {var count : Nat__227979830; kvs : [var ?(K, V)]};
+type DocumentId__446996092 = Nat;
+type DocumentId__867675905 = DocumentId__446996092;
+type EventId__361868567 = Nat;
+type EventId__603961682 = EventId__361868567;
+type ExternalBlob__220559234 = Blob;
+type FileRef__632245377 = FileRef__939992998;
+type FileRef__84826618 = FileRef__939992998;
+type FileRef__939992998 = ExternalBlob__220559234;
+type FundingCommitment__895759990 =
+  {
+    amount : Nat;
+    committedAt : Int;
+    expectedReturn : Nat;
+    id : Nat;
+    investor : Principal;
+    tokenId : Nat
+  };
+type FundingCommitment__991183350 =
+  {
+    amount : Nat;
+    committedAt : Timestamp__941358098;
+    expectedReturn : Nat;
+    id : CommitmentId__425385189;
+    investor : Principal;
+    tokenId : TokenId__1040808229
+  };
+type FundingCommitment__993291397 =
+  {
+    amount : Nat;
+    committedAt : Int;
+    expectedReturn : Nat;
+    id : Nat;
+    investor : Principal;
+    tokenId : Nat
+  };
+type Internal__283199666<K, V> =
+  {children : [var ?Node__204828119<K, V>]; data : Data__44217153<K, V>};
+type InvoiceCategory__1011512773 =
+  {#handAndPowerTools; #heavyEquipmentRental; #materialOrder};
+type InvoiceCategory__647794900 =
+  {#handAndPowerTools; #heavyEquipmentRental; #materialOrder};
+type InvoiceCounters__718936697 = {var nextInvoiceId : Nat};
+type InvoiceId__714481791 = InvoiceId__909937669;
+type InvoiceId__909937669 = Nat;
+type InvoiceLineItem__294055934 =
+  {amount : Nat; description : Text; quantity : Nat};
+type InvoiceLineItem__943362098 =
+  {amount : Nat; description : Text; quantity : Nat};
+type InvoiceStatus__682166507 = {#accepted; #pendingReview; #rejected};
+type InvoiceStatus__868988978 = {#accepted; #pendingReview; #rejected};
+type Invoice__785106573 =
+  {
+    category : InvoiceCategory__1011512773;
+    createdAt : Timestamp__999816509;
+    currency : Text;
+    file : FileRef__84826618;
+    id : InvoiceId__714481791;
+    invoiceDate : Timestamp__999816509;
+    lineItems : [InvoiceLineItem__943362098];
+    mintedAmount : Nat;
+    owner : Principal;
+    retailerName : Text;
+    status : InvoiceStatus__868988978;
+    totalAmount : Nat;
+    vendorReference : Text
+  };
+type Invoice__903791553 =
+  {
+    category : InvoiceCategory__647794900;
+    createdAt : Int;
+    currency : Text;
+    file : Blob;
+    id : Nat;
+    invoiceDate : Int;
+    lineItems : [InvoiceLineItem__294055934];
+    mintedAmount : Nat;
+    owner : Principal;
+    retailerName : Text;
+    status : InvoiceStatus__682166507;
+    totalAmount : Nat;
+    vendorReference : Text
+  };
+type Leaf__598469445<K, V> = {data : Data__44217153<K, V>};
+type LedgerCounters__984040786 = {var nextEventId : Nat};
+type Map__230067015<K, V> = Map__405889023<K, V>;
+type Map__405889023<K, V> = Map__603270868<K, V>;
+type Map__603270868<K, V> =
+  {var root : Node__204828119<K, V>; var size : Nat__227979830};
+type Nat__227979830 = Nat__920180692;
+type Nat__920180692 = Nat;
+type NewActor__660562578 =
+  {
+    accessControlState : AccessControlState__201339279;
+    commitments : Map__230067015<Nat, FundingCommitment__993291397>;
+    counters : Counters__577113774;
+    documents : Map__230067015<Nat, AttachedDocument__740676039>;
+    events : Map__230067015<Nat, TokenEvent__409732143>;
+    invoiceCounters : InvoiceCounters__718936697;
+    invoices : Map__230067015<Nat, Invoice__903791553>;
+    ledgerCounters : LedgerCounters__984040786;
+    tokens : Map__230067015<Nat, TradeToken__64888566>
+  };
+type NewActor__769816496 =
+  {
+    accessControlState : AccessControlState__201339279;
+    commitments : Map__230067015<Nat, FundingCommitment__895759990>;
+    counters : Counters__138551672;
+    documents : Map__230067015<Nat, AttachedDocument__951595075>;
+    tokens : Map__230067015<Nat, TradeToken__301319054>
+  };
+type Node__204828119<K, V> =
+  {#internal : Internal__283199666<K, V>; #leaf : Leaf__598469445<K, V>};
+type OldActor__420691540 =
+  {
+    accessControlState : AccessControlState__201339279;
+    commitments : Map__230067015<Nat, FundingCommitment__993291397>;
+    counters : Counters__577113774;
+    documents : Map__230067015<Nat, AttachedDocument__740676039>;
+    tokens : Map__230067015<Nat, TradeToken__64888566>
+  };
+type OldActor__512397517 = {};
+type Timestamp__301639476 = Int;
+type Timestamp__884806187 = Timestamp__301639476;
+type Timestamp__941358098 = Timestamp__301639476;
+type Timestamp__999816509 = Timestamp__301639476;
+type TokenEventKind__588408772 = {#burn; #mint; #use};
+type TokenEventKind__98066915 = {#burn; #mint; #use};
+type TokenEvent__409732143 =
+  {
+    amount : Nat;
+    createdAt : Int;
+    id : Nat;
+    kind : TokenEventKind__588408772;
+    owner : Principal;
+    reason : Text;
+    reference : ?Text
+  };
+type TokenEvent__676274636 =
+  {
+    amount : Nat;
+    createdAt : Timestamp__884806187;
+    id : EventId__603961682;
+    kind : TokenEventKind__98066915;
+    owner : Principal;
+    reason : Text;
+    reference : ?Text
+  };
+type TokenId__1040808229 = TokenId__281627578;
+type TokenId__281627578 = Nat;
+type TokenKind__254227979 = {#invoice; #purchaseOrder};
+type TokenKind__257496789 = {#invoice; #purchaseOrder};
+type TokenKind__338935130 = {#invoice; #purchaseOrder};
+type TokenStatus__192563264 = {#cancelled; #funded; #matured; #open};
+type TokenStatus__875176592 = {#cancelled; #funded; #matured; #open};
+type TokenStatus__993072009 = {#cancelled; #funded; #matured; #open};
+type TradeToken__1050873228 =
+  {
+    amountFunded : Nat;
+    createdAt : Timestamp__941358098;
+    currency : Text;
+    debtorName : Text;
+    faceValue : Nat;
+    fundingTarget : Nat;
+    id : TokenId__1040808229;
+    issueDate : Timestamp__941358098;
+    issuer : Principal;
+    kind : TokenKind__257496789;
+    maturityDate : Timestamp__941358098;
+    returnTerms : Text;
+    status : TokenStatus__192563264
+  };
+type TradeToken__301319054 =
+  {
+    amountFunded : Nat;
+    createdAt : Int;
+    currency : Text;
+    debtorName : Text;
+    faceValue : Nat;
+    fundingTarget : Nat;
+    id : Nat;
+    issueDate : Int;
+    issuer : Principal;
+    kind : TokenKind__254227979;
+    maturityDate : Int;
+    returnTerms : Text;
+    status : TokenStatus__993072009
+  };
+type TradeToken__64888566 =
+  {
+    amountFunded : Nat;
+    createdAt : Int;
+    currency : Text;
+    debtorName : Text;
+    faceValue : Nat;
+    fundingTarget : Nat;
+    id : Nat;
+    issueDate : Int;
+    issuer : Principal;
+    kind : TokenKind__338935130;
+    maturityDate : Int;
+    returnTerms : Text;
+    status : TokenStatus__875176592
+  };
+type UserRole__91647283 = {#admin; #guest; #user};
+{
+  "00000000_000000" : OldActor__512397517 -> NewActor__769816496;
+  "20261110_120000" : (old : OldActor__420691540) -> NewActor__660562578
+}
+actor  {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__230067015<Principal, UserRole__91647283>
+    };
+  stable commitments :
+    {
+      var root :
+        Node__204828119<CommitmentId__1060597516,
+                         FundingCommitment__991183350>;
+      var size : Nat__227979830
+    };
+  stable counters :
+    {
+      var nextCommitmentId : Nat;
+      var nextDocumentId : Nat;
+      var nextTokenId : Nat
+    };
+  stable documents :
+    {
+      var root :
+        Node__204828119<DocumentId__446996092, AttachedDocument__594305756>;
+      var size : Nat__227979830
+    };
+  stable events :
+    {
+      var root : Node__204828119<EventId__361868567, TokenEvent__676274636>;
+      var size : Nat__227979830
+    };
+  stable invoiceCounters : {var nextInvoiceId : Nat};
+  stable invoices :
+    {
+      var root : Node__204828119<InvoiceId__909937669, Invoice__785106573>;
+      var size : Nat__227979830
+    };
+  stable ledgerCounters : {var nextEventId : Nat};
+  stable tokens :
+    {
+      var root : Node__204828119<TokenId__281627578, TradeToken__1050873228>;
+      var size : Nat__227979830
+    }
+};

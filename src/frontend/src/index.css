@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/SpaceGrotesk.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/assets/fonts/Satoshi.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --font-display: "Space Grotesk";
+    --font-body: "Satoshi";
+    --font-mono: "JetBrains Mono";
+    --radius: 0.375rem;
+
+    --background: 0.145 0.014 60;
+    --foreground: 0.94 0.01 70;
+    --card: 0.185 0.016 60;
+    --card-foreground: 0.94 0.01 70;
+    --popover: 0.205 0.018 60;
+    --popover-foreground: 0.94 0.01 70;
+
+    --primary: 0.78 0.16 162;
+    --primary-foreground: 0.16 0.02 162;
+
+    --secondary: 0.225 0.018 60;
+    --secondary-foreground: 0.86 0.01 70;
+    --muted: 0.225 0.018 60;
+    --muted-foreground: 0.6 0.012 65;
+
+    --accent: 0.76 0.14 65;
+    --accent-foreground: 0.16 0.02 65;
+
+    --destructive: 0.6 0.2 25;
+    --destructive-foreground: 0.95 0.01 25;
+
+    --success: 0.72 0.16 150;
+    --success-foreground: 0.15 0.02 150;
+    --warning: 0.78 0.15 85;
+    --warning-foreground: 0.16 0.02 85;
+
+    --border: 0.275 0.016 60;
+    --input: 0.275 0.016 60;
+    --ring: 0.78 0.16 162;
+
+    --chart-1: 0.78 0.16 162;
+    --chart-2: 0.76 0.14 65;
+    --chart-3: 0.68 0.12 230;
+    --chart-4: 0.7 0.15 320;
+    --chart-5: 0.72 0.16 150;
+
+    --sidebar: 0.17 0.015 60;
+    --sidebar-foreground: 0.94 0.01 70;
+    --sidebar-primary: 0.78 0.16 162;
+    --sidebar-primary-foreground: 0.16 0.02 162;
+    --sidebar-accent: 0.225 0.018 60;
+    --sidebar-accent-foreground: 0.86 0.01 70;
+    --sidebar-border: 0.275 0.016 60;
+    --sidebar-ring: 0.78 0.16 162;
+
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.78 0.16 162),
+      oklch(0.7 0.15 175)
+    );
+    --gradient-subtle: linear-gradient(
+      180deg,
+      oklch(0.185 0.016 60),
+      oklch(0.16 0.014 60)
+    );
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 0.145 0.014 60;
+    --foreground: 0.94 0.01 70;
+    --card: 0.185 0.016 60;
+    --card-foreground: 0.94 0.01 70;
+    --popover: 0.205 0.018 60;
+    --popover-foreground: 0.94 0.01 70;
+
+    --primary: 0.78 0.16 162;
+    --primary-foreground: 0.16 0.02 162;
+
+    --secondary: 0.225 0.018 60;
+    --secondary-foreground: 0.86 0.01 70;
+    --muted: 0.225 0.018 60;
+    --muted-foreground: 0.6 0.012 65;
+
+    --accent: 0.76 0.14 65;
+    --accent-foreground: 0.16 0.02 65;
+
+    --destructive: 0.6 0.2 25;
+    --destructive-foreground: 0.95 0.01 25;
+
+    --success: 0.72 0.16 150;
+    --success-foreground: 0.15 0.02 150;
+    --warning: 0.78 0.15 85;
+    --warning-foreground: 0.16 0.02 85;
+
+    --border: 0.275 0.016 60;
+    --input: 0.275 0.016 60;
+    --ring: 0.78 0.16 162;
+
+    --chart-1: 0.78 0.16 162;
+    --chart-2: 0.76 0.14 65;
+    --chart-3: 0.68 0.12 230;
+    --chart-4: 0.7 0.15 320;
+    --chart-5: 0.72 0.16 150;
+
+    --sidebar: 0.17 0.015 60;
+    --sidebar-foreground: 0.94 0.01 70;
+    --sidebar-primary: 0.78 0.16 162;
+    --sidebar-primary-foreground: 0.16 0.02 162;
+    --sidebar-accent: 0.225 0.018 60;
+    --sidebar-accent-foreground: 0.86 0.01 70;
+    --sidebar-border: 0.275 0.016 60;
+    --sidebar-ring: 0.78 0.16 162;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+  .bg-gradient-subtle {
+    background-image: var(--gradient-subtle);
+  }
+  .text-gradient-primary {
+    background-image: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .font-numeric {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+  .ledger-rule {
+    background-image: linear-gradient(
+      to right,
+      transparent,
+      oklch(var(--border)) 20%,
+      oklch(var(--border)) 80%,
+      transparent
+    );
+    height: 1px;
+  }
+  .grain-overlay {
+    background-image: radial-gradient(
+      oklch(var(--foreground) / 0.025) 1px,
+      transparent 1px
+    );
+    background-size: 4px 4px;
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "overview": "A trade-finance marketplace with a utility-token explorer dashboard where businesses tokenize invoices and users earn, track and review token activity.",
+  "features": [
+    "Browse a public explorer dashboard with network activity and recent token events",
+    "See your utility token balance, tokens earned and tokens used when signed in",
+    "Scan or upload invoices for material orders, heavy equipment rentals, and brand-specific hand and power tools",
+    "Review extracted invoice details and submit them to earn utility tokens",
+    "Filter a full history of token mint, use and burn events",
+    "Browse the marketplace and fund trade tokens as a signed-in user"
+  ],
+  "category": "trade-finance",
+  "tags": [
+    "fintech",
+    "marketplace",
+    "utility-token",
+    "invoicing",
+    "dashboard"
+  ],
+  "last_updated": "2026-11-10T12:54:13.626Z"
+}

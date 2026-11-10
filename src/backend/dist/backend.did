@@ -1,0 +1,343 @@
+type _ImmutableObjectStorageRefillResult = 
+ record {
+   success: opt bool;
+   topped_up_amount: opt nat;
+ };
+type _ImmutableObjectStorageRefillInformation = record {
+                                                  proposed_top_up_amount:
+                                                   opt nat;};
+type _ImmutableObjectStorageCreateCertificateResult = 
+ record {
+   blob_hash: text;
+   method: text;
+ };
+type Value = 
+ variant {
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "nat": nat;
+   "null";
+   "text": text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type TradeToken = 
+ record {
+   amountFunded: nat;
+   createdAt: Timestamp;
+   currency: text;
+   debtorName: text;
+   faceValue: nat;
+   fundingTarget: nat;
+   id: TokenId;
+   issueDate: Timestamp;
+   issuer: principal;
+   kind: TokenKind;
+   maturityDate: Timestamp;
+   returnTerms: text;
+   status: TokenStatus;
+ };
+type TradeResult_3 = 
+ variant {
+   err: TradeError;
+   ok: DocumentId;
+ };
+type TradeResult_2 = 
+ variant {
+   err: TradeError;
+   ok: TokenId;
+ };
+type TradeResult_1 = 
+ variant {
+   err: TradeError;
+   ok: CommitmentId;
+ };
+type TradeResult = 
+ variant {
+   err: TradeError;
+   ok;
+ };
+type TradeError = 
+ variant {
+   exceedsFundingTarget: record {remaining: nat;};
+   invalidTerms: text;
+   notIssuer;
+   tokenCancelled;
+   tokenMatured;
+   tokenNotFound: TokenId;
+   tokenNotOpen;
+   unauthorizedIssuer;
+ };
+type TokenSummary = 
+ record {
+   amountFunded: nat;
+   currency: text;
+   faceValue: nat;
+   fundingProgress: float64;
+   fundingTarget: nat;
+   id: TokenId;
+   issuer: principal;
+   kind: TokenKind;
+   maturityDate: Timestamp;
+   returnTerms: text;
+   status: TokenStatus;
+ };
+type TokenStatus = 
+ variant {
+   cancelled;
+   funded;
+   matured;
+   open;
+ };
+type TokenSort = 
+ variant {
+   faceValue;
+   fundingProgress;
+   maturityDate;
+ };
+type TokenKind = 
+ variant {
+   invoice;
+   purchaseOrder;
+ };
+type TokenId = nat;
+type TokenEventKind = 
+ variant {
+   burn;
+   mint;
+   use;
+ };
+type TokenEvent = 
+ record {
+   amount: nat;
+   createdAt: Timestamp;
+   id: EventId;
+   kind: TokenEventKind;
+   owner: principal;
+   reason: text;
+   reference: opt text;
+ };
+type Timestamp = int;
+type Result__1 = 
+ variant {
+   err: Error;
+   ok;
+ };
+type Result = 
+ record {
+   hasMore: bool;
+   rows: vec vec Cell;
+ };
+type PublicEventView = 
+ record {
+   amount: nat;
+   createdAt: Timestamp;
+   id: EventId;
+   kind: TokenEventKind;
+   ownerShort: text;
+   reason: text;
+   reference: opt text;
+ };
+type LedgerSummary = 
+ record {
+   invoiceCount: nat;
+   participantCount: nat;
+   totalBurned: nat;
+   totalMinted: nat;
+   totalUsed: nat;
+ };
+type IssuedTokenView = 
+ record {
+   commitmentCount: nat;
+   token: TradeToken;
+ };
+type InvoiceView = record {invoice: Invoice;};
+type InvoiceStatus = 
+ variant {
+   accepted;
+   pendingReview;
+   rejected;
+ };
+type InvoiceResult = 
+ variant {
+   err: InvoiceError;
+   ok: InvoiceId;
+ };
+type InvoiceLineItem = 
+ record {
+   amount: nat;
+   description: text;
+   quantity: nat;
+ };
+type InvoiceId = nat;
+type InvoiceError = 
+ variant {
+   alreadyReviewed: InvoiceStatus;
+   invalidInvoice: text;
+   invoiceNotFound: InvoiceId;
+   notOwner;
+ };
+type InvoiceCategory = 
+ variant {
+   handAndPowerTools;
+   heavyEquipmentRental;
+   materialOrder;
+ };
+type Invoice = 
+ record {
+   category: InvoiceCategory;
+   createdAt: Timestamp;
+   currency: text;
+   file: FileRef;
+   id: InvoiceId;
+   invoiceDate: Timestamp;
+   lineItems: vec InvoiceLineItem;
+   mintedAmount: nat;
+   owner: principal;
+   retailerName: text;
+   status: InvoiceStatus;
+   totalAmount: nat;
+   vendorReference: text;
+ };
+type FundingCommitment = 
+ record {
+   amount: nat;
+   committedAt: Timestamp;
+   expectedReturn: nat;
+   id: CommitmentId;
+   investor: principal;
+   tokenId: TokenId;
+ };
+type FundedTokenView = 
+ record {
+   commitment: FundingCommitment;
+   token: TradeToken;
+ };
+type FileRef = blob;
+type EventId = nat;
+type Error = 
+ variant {
+   AmbiguousAttribute: record {
+                         field: text;
+                         sources: vec text;
+                       };
+   FrontendOriginMismatch: record {
+                             expected: vec text;
+                             got: text;
+                           };
+   FrontendOriginsNotConfigured;
+   MalformedCandid;
+   MissingField: text;
+   MixedSsoSources: record {
+                      otherKeys: vec text;
+                      ssoKeys: vec text;
+                    };
+   NoAttributes;
+   Stale: record {ageNs: nat;};
+   UnknownNonce;
+   UntrustedSsoSource: record {domain: text;};
+ };
+type DocumentId = nat;
+type CommitmentId = nat;
+type Cell = 
+ record {
+   name: text;
+   value: Value;
+ };
+type BalanceView = 
+ record {
+   balance: nat;
+   burned: nat;
+   earned: nat;
+   used: nat;
+ };
+type AttachedDocument = 
+ record {
+   contentType: text;
+   file: FileRef;
+   fileName: text;
+   id: DocumentId;
+   tokenId: TokenId;
+   uploadedAt: Timestamp;
+ };
+service : {
+  _immutableObjectStorageBlobsAreLive: (hashes: vec blob) -> (vec bool) query;
+  _immutableObjectStorageBlobsToDelete: () -> (vec blob) query;
+  _immutableObjectStorageConfirmBlobDeletion: (blobs: vec blob) -> ();
+  _immutableObjectStorageCreateCertificate: (blobHash: text) ->
+   (_ImmutableObjectStorageCreateCertificateResult);
+  _immutableObjectStorageRefillCashier: (refillInformation:
+   opt _ImmutableObjectStorageRefillInformation) ->
+   (_ImmutableObjectStorageRefillResult);
+  _immutableObjectStorageUpdateGatewayPrincipals: () -> ();
+  _initialize_access_control: () -> ();
+  _internet_identity_sign_in_finish: () -> (Result__1);
+  _internet_identity_sign_in_start: () -> (blob);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  /// Attach a document to a token the caller issued. Signed-in callers only.
+  attachDocument: (tokenId: TokenId, file: FileRef, fileName: text,
+   contentType: text) -> (TradeResult_3);
+  /// Cancel an open token the caller issued. Signed-in callers only.
+  cancelToken: (tokenId: TokenId) -> (TradeResult);
+  /// Create a tokenized invoice or purchase order. Signed-in callers only.
+  createToken: (kind: TokenKind, faceValue: nat, currency: text, debtorName:
+   text, issueDate: Timestamp, maturityDate: Timestamp, fundingTarget: 
+   nat, returnTerms: text) -> (TradeResult_2);
+  execute: (qJson: text) -> (Result) query;
+  /// Commit funds to an open token. Signed-in callers only.
+  /// Rejects a token that is not open, a cancelled or matured token, and an
+  /// amount that exceeds the remaining funding target. Funding progress is
+  /// updated automatically and the token moves to funded the moment
+  /// commitments reach its funding target, locking further commitments.
+  fundToken: (tokenId: TokenId, amount: nat) -> (TradeResult_1);
+  getApiDoc: () -> (text) query;
+  getCallerUserRole: () -> (UserRole) query;
+  /// Public aggregate network totals. Anyone may read.
+  getLedgerSummary: () -> (LedgerSummary) query;
+  /// The caller's balance and lifetime totals. Signed-in callers only.
+  getMyBalance: () -> (BalanceView) query;
+  /// Public token detail. Anyone may read.
+  getToken: (tokenId: TokenId) -> (opt TradeToken) query;
+  isCallerAdmin: () -> (bool) query;
+  /// Tokens the caller funded, with the caller's commitment, current status and
+  /// expected return. Private to the caller.
+  listFundedTokens: () -> (vec FundedTokenView) query;
+  /// Tokens the caller issued. Private to the caller.
+  listIssuedTokens: () -> (vec IssuedTokenView) query;
+  /// Public marketplace listing. Anyone may read.
+  listMarketplace: (statusFilter: opt TokenStatus, sortBy: TokenSort) ->
+   (vec TokenSummary) query;
+  /// The caller's own events, newest first, optionally filtered by kind.
+  /// Signed-in callers only.
+  listMyEvents: (kindFilter: opt TokenEventKind) -> (vec TokenEvent) query;
+  /// The caller's own invoices, newest first. Private to the caller.
+  listMyInvoices: () -> (vec InvoiceView) query;
+  /// Public feed of recent token events with the owner principal shortened.
+  /// Anyone may read.
+  listRecentEvents: (limit: nat) -> (vec PublicEventView) query;
+  /// Public list of documents attached to a token. Anyone may read.
+  listTokenDocuments: (tokenId: TokenId) -> (vec AttachedDocument) query;
+  schema: () -> (text) query;
+  /// Move an open token to funded once its funding target is reached.
+  /// Signed-in callers only.
+  settleFunding: (tokenId: TokenId) -> (TradeResult);
+  /// Move a funded token that has reached its maturity date to matured and
+  /// distribute returns to its funders per the token's return terms. The
+  /// distribution is recorded per commitment on each commitment's expected
+  /// return. Signed-in callers only.
+  settleMaturity: (tokenId: TokenId) -> (TradeResult);
+  /// Submit a reviewed invoice: store it as accepted and mint tokens for the
+  /// owner. Signed-in callers only.
+  submitInvoice: (category: InvoiceCategory, retailerName: text,
+   vendorReference: text, invoiceDate: Timestamp, totalAmount: nat, currency:
+   text, lineItems: vec InvoiceLineItem, file: FileRef) -> (InvoiceResult);
+  /// Update an open token the caller issued. Signed-in callers only.
+  updateToken: (tokenId: TokenId, faceValue: nat, currency: text, debtorName:
+   text, issueDate: Timestamp, maturityDate: Timestamp, fundingTarget: 
+   nat, returnTerms: text) -> (TradeResult);
+}
